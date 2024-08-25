@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Data fetch</title>
+</head>
+<body>
+    <main>
+        <div>
+            <input type="text" placeholder="Search name..." id="text" name="text">
+            <button type="button">Search</button>
+        </div>
+        <img height="500" width="500" src="#">
+    </main>
+    <script>
+        const img = document.querySelector('img');
+        const btn = document.querySelector('button');
+        const input = document.querySelector('input');
+        let source = input;
+
+
+        btn.addEventListener('click', change);
+        function change() {
+            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=YNBm3HS8YMVb4pPxTyO11p2e7lkum8n5&s=${source.value}`, {mode: 'cors'})
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                img.src = response.data.images.original.url;
+            })
+            .catch(function onError(response) {
+                if (!response.ok) {
+                    alert('Image could not be loaded at this moment, please try again later');
+                }
+                alert('Image could not be loaded at this moment, please try again later');
+            })
+        }
+        fetch('https://api.giphy.com/v1/gifs/translate?api_key=YNBm3HS8YMVb4pPxTyO11p2e7lkum8n5&s=miles morales', {mode: 'cors'})
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                img.src = response.data.images.original.url;
+            })
+            .catch(function onError(response) {
+                if (!response.ok) {
+                    alert('Image could not be loaded at this moment, please try again later');
+                }
+                alert('Image could not be loaded at this moment, please try again later');
+            })
+    </script>
+</body>
+</html>
